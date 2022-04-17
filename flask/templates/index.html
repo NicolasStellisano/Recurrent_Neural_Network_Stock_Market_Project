@@ -1,33 +1,55 @@
 {% extends 'base.html' %}
-
 {% block content %}
-    <h1>{% block title %} Stock Market Prediction {% endblock %}</h1>
-    <select id="combo_symbol">Accion
+    <h1>{% block title %} Acciones Argentina {% endblock %}</h1>
+    <select class="form-select" onchange="combo_symbol_onchange(event)" id="combo_symbol">Accion
         <option value="GGAL.BA" selected>GGAL</option>
         <option value="SUPV.BA">SUPV</option>
         <option value="CEPU.BA">CEPU</option>
     </select>
-    <div id="plotly-stock-prediction"></div>
+    <div style="width: 90vw;position: relative;display:block;margin:auto" id="plotly-stock-prediction"></div>
     <div class='container'>
             <form>
-                <a href=# id=btn_predict><button class='btn btn-default'>Prediccion 30 días</button></a>
+                <div class="row">
+                    <div class="col text-center">
+                {% if prediction=="False" %}
+               <button type="button" id=btn_predict onclick="btn_predict_onclick()" class='btn btn-primary'>Prediccion 30 días</button>
+               {% else %}
+               <button type="button" id=btn_predict onclick="combo_symbol_onchange()" class='btn btn-primary'>Volver</button>
+               {% endif %}
+               <button style="display: none;" id=btn_loading class="btn btn-primary" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Cargando...
+              </button>
+                    </div>
+                </div>
+                
             </form>
     
     </div>
     <script type=text/javascript>
-        $(function() {
-          $('a#test').on('click', function(e) {
-            e.preventDefault()
-            $.getJSON('/prediction/'+document.getElementById("combo_symbol"),
-                function(data) {
-              //do nothing
-            });
-            return false;
-          });
-        });
+    window.onload = function() {
+        var symbol = "{{symbol}}";
+        $("#combo_symbol").val(symbol)
+};
+        function btn_predict_onclick() {
+           console.log("CLICK EVENT")
+           $("#btn_predict").hide()
+           $("#btn_loading").show()
+           $("#combo_symbol").attr('disabled', 'disabled');
+           window.location.href = '/prediction/'+$("#combo_symbol").val();               
+        //    $('#id').removeAttr('disabled');
+        }
+        function combo_symbol_onchange()
+        {
+            window.location.href = '/index/'+$("#combo_symbol").val();  
+        }
+      
 </script>
 <script>
 var graph = {{ plot_json | safe }};
+
+var config = {"scrollZoom": true};
+Plotly.setPlotConfig(config);
 Plotly.plot('plotly-stock-prediction', graph, {});
 </script>
 {% endblock %}

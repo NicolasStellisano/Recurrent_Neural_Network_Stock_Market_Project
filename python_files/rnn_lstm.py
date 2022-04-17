@@ -8,6 +8,7 @@ from sklearn.preprocessing import MinMaxScaler
 import yfinance_api as yf
 
 def getPrediction(symbol:str,start="",end=""):
+    print("Entro Prediction")
     pd.options.mode.chained_assignment = None
     tf.random.set_seed(0)
     df = yf.getHistory(symbol,start,end)
