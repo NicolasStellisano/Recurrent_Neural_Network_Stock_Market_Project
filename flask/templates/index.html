@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Stock Market Prediction {% endblock %}</h1>
+    <select id="combo_symbol">Accion
+        <option value="GGAL.BA" selected>GGAL</option>
+        <option value="SUPV.BA">SUPV</option>
+        <option value="CEPU.BA">CEPU</option>
+    </select>
+    <div id="plotly-stock-prediction"></div>
+    <div class='container'>
+            <form>
+                <a href=# id=btn_predict><button class='btn btn-default'>Prediccion 30 días</button></a>
+            </form>
+    
+    </div>
+    <script type=text/javascript>
+        $(function() {
+          $('a#test').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/prediction/'+document.getElementById("combo_symbol"),
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+        });
+</script>
+<script>
+var graph = {{ plot_json | safe }};
+Plotly.plot('plotly-stock-prediction', graph, {});
+</script>
+{% endblock %}
