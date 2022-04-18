@@ -14,7 +14,7 @@ h1 {
 .button-absolute{
     position: absolute;
     top: 32vh;
-    right: 10vw;
+    right: 14vw;
 }
 
 #plotly-stock-prediction .modebar {
