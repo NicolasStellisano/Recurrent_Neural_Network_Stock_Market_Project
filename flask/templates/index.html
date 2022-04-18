@@ -1,22 +1,44 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="container" style="margin-top: 2vh;">
     <h1>{% block title %} Acciones Argentina {% endblock %}</h1>
-    <select class="form-select" onchange="combo_symbol_onchange(event)" id="combo_symbol">Accion
-        <option value="GGAL.BA" selected>GGAL</option>
-        <option value="SUPV.BA">SUPV</option>
-        <option value="CEPU.BA">CEPU</option>
+</div>
+    <br>
+    <div style="width: 30vw;position: relative;display:block;margin:auto" class="container">
+    <select style="color:white" class="form-select bg-primary" onchange="combo_symbol_onchange(event)" id="combo_symbol">Accion
+        <option value="ALUA.BA" selected>ALUA - ALUAR</option>
+        <option value="BBAR.BA">BBAR - BANCO FRANCÉS</option>
+        <option value="BMA.BA">BMA - BANCO MACRO</option>
+        <option value="BYMA.BA">BYMA - BOLSAS Y MERCADOS ARGENTINA</option>
+        <option value="CEPU.BA">CEPU - CENTRAL PUERTO</option>
+        <option value="COME.BA">COME - COMERCIAL DEL PLATA</option>
+        <option value="CRES.BA">CRES - CRESUD</option>
+        <option value="CVH.BA">CVH - CABLEVISION HOLDING S.A.</option>
+        <option value="EDN.BA">EDN - EDENOR</option>
+        <option value="GGAL.BA">GGAL - GRUPO FINANCIERO GALICIA</option>
+        <option value="HARG.BA">HARG - HOLCIM </option>
+        <option value="LOMA.BA">LOMA - LOMA NEGRA</option>
+        <option value="MIRG.BA">MIRG - MIRGOR</option>
+        <option value="PAMP.BA">PAMP - PAMPA ENERGÍA</option>
+        <option value="SUPV.BA">SUPV - BANCO SUPERVIELLE</option>
+        <option value="TECO2.BA">TECO2 - TELECOM</option>
+        <option value="TGSU2.BA">TGSU2 - TRANSPORTADORA DE GAS DEL SUR</option>
+        <option value="TXAR.BA">TXAR - TERNIUM ARGENTINA S.A.</option>
+        <option value="VALO.BA">VALO - GRUPO FINANCIERO VALORES S.A.</option>
+        <option value="YPFD.BA">YPFD - YPF S.A.</option>
     </select>
-    <div style="width: 90vw;position: relative;display:block;margin:auto" id="plotly-stock-prediction"></div>
+</div>
+    <div style="width: 90vw;position: relative;display:block;margin:auto;" id="plotly-stock-prediction"></div>
     <div class='container'>
             <form>
                 <div class="row">
                     <div class="col text-center">
                 {% if prediction=="False" %}
-               <button type="button" id=btn_predict onclick="btn_predict_onclick()" class='btn btn-primary'>Prediccion 30 días</button>
+               <button type="button" id=btn_predict onclick="btn_predict_onclick()" class='btn btn-primary btn-lg button-absolute'>Prediccion 30 días</button>
                {% else %}
-               <button type="button" id=btn_predict onclick="combo_symbol_onchange()" class='btn btn-primary'>Volver</button>
+               <button type="button" id=btn_predict onclick="combo_symbol_onchange()" class='btn btn-primary btn-lg button-absolute'>Volver</button>
                {% endif %}
-               <button style="display: none;" id=btn_loading class="btn btn-primary" type="button" disabled>
+               <button style="display: none;" id=btn_loading class="btn btn-primary btn-lg button-absolute" type="button" disabled>
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 Cargando...
               </button>
@@ -48,7 +70,7 @@
 <script>
 var graph = {{ plot_json | safe }};
 
-var config = {"scrollZoom": true};
+var config = {"scrollZoom": true,"displayModeBar": false};
 Plotly.setPlotConfig(config);
 Plotly.plot('plotly-stock-prediction', graph, {});
 </script>

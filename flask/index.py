@@ -11,7 +11,7 @@ def history(symbol:str):
     return render_template('index.html',plot_json=plot_json,prediction="False",symbol=symbol)
 
 @app.route('/index')
-def index(symbol="GGAL.BA"):
+def index(symbol="ALUA.BA"):
     plot_json=plotly.graph_history_json(symbol,"2014-01-01")
     return render_template('index.html',plot_json=plot_json,prediction="False",symbol=symbol)
 

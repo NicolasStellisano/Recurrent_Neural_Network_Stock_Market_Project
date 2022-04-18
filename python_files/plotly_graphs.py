@@ -15,10 +15,11 @@ def graph_prediction_json(symbol,start="",end=""):
     title=yf.getInfo(symbol)
     print(title)
     layout = go.Layout(xaxis=dict(range=[(datetime.date.today()-datetime.timedelta(days=800)).strftime('%Y-%m-%d'),(datetime.date.today()+datetime.timedelta(days=5)).strftime('%Y-%m-%d')]))
-    fig = go.Figure([go.Scatter(x=df_prediction.index, y=df_prediction['Real'],name="Real" )],layout=layout)
+    fig = go.Figure([go.Scatter(x=df_prediction.index, y=df_prediction['Real'],name="Real",line=dict(color='#00FF00') )],layout=layout)
     fig.add_scatter(x=df_prediction.index, y=df_prediction['Prediccion'],name="Prediccion", mode='lines')
     fig.update_layout(xaxis_rangeslider_visible=False,title=title["longName"],yaxis_title="Precio $")
-    fig.update_layout(height=800,dragmode="pan")
+    fig.update_layout(height=750,dragmode="pan",paper_bgcolor='rgba(0,0,0,0)',plot_bgcolor='rgba(0,0,0,0)',font_color="white",title_font_size="14")
+
 
     plot_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return plot_json
@@ -32,9 +33,9 @@ def graph_history_json(symbol,start="",end=""):
     title=yf.getInfo(symbol)
     print(title)
     layout = go.Layout(xaxis=dict(range=[(datetime.date.today()-datetime.timedelta(days=1044)).strftime('%Y-%m-%d'),(datetime.date.today()+datetime.timedelta(days=5)).strftime('%Y-%m-%d')]))
-    fig = go.Figure([go.Scatter(x=df_history.index, y=df_history["Close"])],layout=layout)#layout=layout
-    fig.update_layout(height=800,dragmode="pan")
-    fig.update_layout(xaxis_rangeslider_visible=True,title=title["longName"],yaxis_title="Precio $")
+    fig = go.Figure([go.Scatter(x=df_history.index, y=df_history["Close"], line=dict(color='#00FF00'))],layout=layout)#layout=layout
+    fig.update_layout(height=750,dragmode="pan",paper_bgcolor='rgba(0,0,0,0)',plot_bgcolor='rgba(0,0,0,0)',font_color="white",title_font_size="14")
+    fig.update_layout(xaxis_rangeslider_visible=False,title=title["longName"],yaxis_title="Precio $")
     
     plot_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return plot_json

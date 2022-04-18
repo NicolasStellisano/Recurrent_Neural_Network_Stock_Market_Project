@@ -1,8 +1,23 @@
 h1 {
-    border-bottom: 2px #eee solid;
-    color: brown;
+    /* border-bottom: 4px rgb(0, 52, 121) solid; */
     text-align: center;
     padding: 10px;
     margin: auto;
     display: block;
+    color:white
 }
+.background-gradient{
+    background-image: linear-gradient(to bottom, rgb(2, 34, 59),rgb(0, 52, 121) );
+    min-height: 100vh;
+}
+
+.button-absolute{
+    position: absolute;
+    top: 32vh;
+    right: 10vw;
+}
+
+#plotly-stock-prediction .modebar {
+    background: rgba(0, 52, 121, 0);
+  }
+
