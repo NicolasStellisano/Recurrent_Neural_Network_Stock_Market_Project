@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 import sys
-sys.path.insert(1, '../python_files')
+sys.path.insert(1, './python_files')
 import plotly_graphs as plotly
 import sqlite3
 app = Flask(__name__)
