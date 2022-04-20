@@ -4,6 +4,8 @@ sys.path.insert(1, './python_files')
 import plotly_graphs as plotly
 import sqlite3
 app = Flask(__name__)
+import os
+
 
 DATABASE = '/database.db'
 
@@ -24,4 +26,4 @@ def prediction(symbol:str):
     return render_template('index.html',plot_json=plot_json,prediction="True",symbol=symbol)
 
 if __name__=='__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
